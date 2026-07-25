@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 
 const EXTENSION_NAME = "Window Title Plugin";
 const TITLE_CACHE_KEY = "windowTitle.titleCache";
-const DEFAULT_TITLE_FILE = ".env/window_title.txt";
+const DEFAULT_TITLE_FILE = ".vscode/window_title.txt";
 const MANAGED_WORKSPACE_SETTING = "windowTitle.managedWorkspace";
 /** Pre-1.0.8 setting key; still recognized so old managed workspaces can be cleaned up. */
 const LEGACY_MANAGED_WORKSPACE_SETTING = "cursorWindowTitle.managedWorkspace";

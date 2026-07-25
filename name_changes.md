@@ -13,3 +13,4 @@
 | `cursor-window-title-*.vsix` | removed | Old package artifacts deleted; new name is `window-title-*.vsix` |
 | folder `cursor_window_title_plugin` | `window_title_plugin` | Rename locally when the folder is not open in the editor |
 | publisher `matthew-schinkel` | `MatthewSchinkel` | Must match Marketplace publisher ID |
+| `.env/window_title.txt` | `.vscode/window_title.txt` | Title file location (no fallback to `.env`) |

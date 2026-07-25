@@ -24,12 +24,12 @@ Open this folder in VS Code, press F5 (or Run Extension) to launch an Extension 
 ## instructions_usage
 In any project:
 
-1. Create folder `.env` at the workspace root
-2. Create `.env/window_title.txt` with one line (the desired window title)
+1. Create folder `.vscode` at the workspace root (if it does not already exist)
+2. Create `.vscode/window_title.txt` with one line (the desired window title)
 3. Open the project with the extension installed; title applies on startup and when that file changes (window title, bottom-left workspace label via a managed `{title}.code-workspace`, and Recents label)
 4. The same title is used for Open Recent / Windows taskbar Recents (jump list), including SSH remotes (`Title [SSH: host]`)
 5. To update labels for other already-listed projects: Command Palette → **Window Title: Refresh Recent / Jump List Labels**
-   - Local: reads `.env/window_title.txt` directly
+   - Local: reads `.vscode/window_title.txt` directly
    - SSH: reads when that remote is reachable; otherwise uses a cache filled the last time you opened that remote
 
 If a custom title bar ignores `window.title`, use:

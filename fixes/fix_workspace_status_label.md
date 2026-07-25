@@ -10,7 +10,7 @@ The status-bar item **"Current workspace: …"** does not use `window.title`.
 - Saved `.code-workspace` → basename of that file (without `.code-workspace`)
 - Calling `updateWorkspaceFolders` to rename a single-folder window → **"Untitled (Workspace)"**
 
-So neither `window.title` nor a folder rename alone can put `.env/window_title.txt` into that bottom-left label for a normal folder open.
+So neither `window.title` nor a folder rename alone can put `.vscode/window_title.txt` into that bottom-left label for a normal folder open.
 
 ## Fix (v1.0.7)
 

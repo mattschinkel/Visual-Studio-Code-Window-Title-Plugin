@@ -10,7 +10,7 @@ Sets the VS Code **window title** from a per-project file when you open a worksp
 Put the title in:
 
 ```text
-.env/window_title.txt
+.vscode/window_title.txt
 ```
 
 Use the first non-empty line as the window title, workspace folder name, and Recents label.
@@ -39,6 +39,12 @@ npx vsce package --no-dependencies
 
 In VS Code: **Extensions → … → Install from VSIX…** and pick the generated `.vsix`.
 
+### Marketplace
+
+Search **Window Title Plugin** in the Extensions view, or open:
+
+https://marketplace.visualstudio.com/items?itemName=MatthewSchinkel.window-title
+
 ## Title bar note
 
 Some editors use a custom title bar that ignores `window.title`. Use:
@@ -53,7 +59,7 @@ The extension offers this once on first activation, or run command **Window Titl
 
 | Command | Action |
 |---------|--------|
-| Window Title: Apply from .env/window_title.txt | Re-read the title file and set `window.title` + recent label |
+| Window Title: Apply from .vscode/window_title.txt | Re-read the title file and set `window.title` + recent label |
 | Window Title: Refresh Recent / Jump List Labels | Scan recent projects and set labels from their title files |
 | Window Title: Prefer Native Title Bar | Set `window.titleBarStyle` to `native` |
 
@@ -63,7 +69,7 @@ On open, the extension also sets the workspace **recent label** (used by **Open 
 
 Works for **local** and **SSH remote** folders:
 
-- Reads `.env/window_title.txt` through the VS Code file API (including over SSH when that remote is open)
+- Reads `.vscode/window_title.txt` through the VS Code file API (including over SSH when that remote is open)
 - Caches each project title so Recents can still be updated when the SSH host is not currently connected
 - SSH labels look like `My Title [SSH: proxmox]`
 
@@ -73,13 +79,13 @@ For older projects already in Recents, run **Window Title: Refresh Recent / Jump
 
 | Setting | Default | Meaning |
 |---------|---------|---------|
-| `windowTitle.titleFile` | `.env/window_title.txt` | Title file path |
+| `windowTitle.titleFile` | `.vscode/window_title.txt` | Title file path |
 | `windowTitle.titleTemplate` | `${customTitle}` | Written to `window.title` |
 | `windowTitle.watchFiles` | `true` | Re-apply on file change |
 | `windowTitle.updateRecentLabel` | `true` | Update Recents / jump-list labels |
 | `windowTitle.updateWorkspaceName` | `true` | Create/open `{title}.code-workspace` so the bottom-left workspace label matches the title |
 
-> The bottom-left **Current workspace** label comes from the `.code-workspace` file name (or the folder basename if you only opened a folder). With `updateWorkspaceName` enabled, the extension writes a managed `{title}.code-workspace` and opens it so that label shows your title from `.env/window_title.txt` — without creating an "Untitled (Workspace)".
+> The bottom-left **Current workspace** label comes from the `.code-workspace` file name (or the folder basename if you only opened a folder). With `updateWorkspaceName` enabled, the extension writes a managed `{title}.code-workspace` and opens it so that label shows your title from `.vscode/window_title.txt` — without creating an "Untitled (Workspace)".
 
 ## License
 

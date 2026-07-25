@@ -4,7 +4,7 @@ Author: Matthew Schinkel
 
 ## Problem
 
-To set the workspace name from `.env/window_title.txt`, the extension called
+To set the workspace name from `.vscode/window_title.txt`, the extension called
 `vscode.workspace.updateWorkspaceFolders(0, 1, { uri, name })` on the first
 folder.
 

@@ -1,8 +1,8 @@
 {
   "name": "window-title",
   "displayName": "Window Title Plugin",
-  "description": "Sets the VS Code window title from .env/window_title.txt when a project opens.",
-  "version": "1.0.8",
+  "description": "Sets the VS Code window title from .vscode/window_title.txt when a project opens.",
+  "version": "1.0.9",
   "publisher": "MatthewSchinkel",
   "author": {
     "name": "Matthew Schinkel"
@@ -25,7 +25,7 @@
   "keywords": [
     "window",
     "title",
-    "env",
+    "vscode",
     "project",
     "workspace",
     "ssh"
@@ -45,7 +45,7 @@
     "commands": [
       {
         "command": "windowTitle.apply",
-        "title": "Window Title: Apply from .env/window_title.txt"
+        "title": "Window Title: Apply from .vscode/window_title.txt"
       },
       {
         "command": "windowTitle.useNativeTitleBar",
@@ -71,7 +71,7 @@
         },
         "windowTitle.titleFile": {
           "type": "string",
-          "default": ".env/window_title.txt",
+          "default": ".vscode/window_title.txt",
           "description": "Workspace-relative path to the title file (first non-empty line is used)."
         },
         "windowTitle.titleTemplate": {
