@@ -10,6 +10,7 @@ instructions.txt
 progress.md
 node_modules/**
 *.vsix
+*.code-workspace
 .env/**
 .env.example
 **/*.md
