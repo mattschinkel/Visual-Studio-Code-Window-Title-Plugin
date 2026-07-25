@@ -29,7 +29,7 @@
 - [ ] Confirm SSH recent labels after opening a remote with `.env/window_title.txt`
 - [ ] Optional: support multi-root workspaces (per-folder titles)
 - [ ] Optional: add a 128×128 PNG `icon` in `package.json` for Marketplace listing
-- [ ] Push initial source to https://github.com/mattschinkel/Visual-Studio-Code-Window-Title-Plugin.git
+- [x] Push initial source to https://github.com/mattschinkel/Visual-Studio-Code-Window-Title-Plugin.git
 - [ ] Create Marketplace publisher `matthew-schinkel` and publish first release
 - [ ] Confirm window title is visible after reload (use native title bar if custom bar ignores it)
 
