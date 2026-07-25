@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "Window Title Plugin",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"window.title": "Window Title Plugin"
+	}
+}

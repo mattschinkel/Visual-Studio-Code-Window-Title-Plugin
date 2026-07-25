@@ -1,0 +1,104 @@
+{
+  "name": "cursor-window-title",
+  "displayName": "Window Title Plugin",
+  "description": "Sets the Cursor/VS Code window title from .env/window_title.txt when a project opens.",
+  "version": "1.0.7",
+  "publisher": "matthew-schinkel",
+  "author": {
+    "name": "Matthew Schinkel"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mattschinkel/Visual-Studio-Code-Window-Title-Plugin#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mattschinkel/Visual-Studio-Code-Window-Title-Plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mattschinkel/Visual-Studio-Code-Window-Title-Plugin/issues"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "window",
+    "title",
+    "cursor",
+    "env",
+    "project",
+    "workspace",
+    "ssh"
+  ],
+  "galleryBanner": {
+    "color": "#1e293b",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cursorWindowTitle.apply",
+        "title": "Window Title: Apply from .env/window_title.txt"
+      },
+      {
+        "command": "cursorWindowTitle.useNativeTitleBar",
+        "title": "Window Title: Prefer Native Title Bar (Cursor)"
+      },
+      {
+        "command": "cursorWindowTitle.refreshRecentLabels",
+        "title": "Window Title: Refresh Recent / Jump List Labels"
+      }
+    ],
+    "configuration": {
+      "title": "Window Title Plugin",
+      "properties": {
+        "cursorWindowTitle.updateRecentLabel": {
+          "type": "boolean",
+          "default": true,
+          "description": "Also set the Open Recent / Windows taskbar jump-list label from the project title."
+        },
+        "cursorWindowTitle.updateWorkspaceName": {
+          "type": "boolean",
+          "default": true,
+          "description": "Create/open a managed .code-workspace named after the title so the bottom-left workspace label matches (avoids 'Untitled (Workspace)' from renaming a single-folder window)."
+        },
+        "cursorWindowTitle.titleFile": {
+          "type": "string",
+          "default": ".env/window_title.txt",
+          "description": "Workspace-relative path to the title file (first non-empty line is used)."
+        },
+        "cursorWindowTitle.titleTemplate": {
+          "type": "string",
+          "default": "${customTitle}",
+          "description": "Value written to window.title. Use ${customTitle} for the loaded title. Leave empty to set window.title to the raw title only."
+        },
+        "cursorWindowTitle.watchFiles": {
+          "type": "boolean",
+          "default": true,
+          "description": "Watch the title file and re-apply when it changes."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package --no-dependencies",
+    "publish:marketplace": "vsce publish --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.2.0",
+    "typescript": "^5.5.0"
+  }
+}

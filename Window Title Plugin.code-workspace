@@ -1,0 +1,12 @@
+{
+  "folders": [
+    {
+      "name": "Window Title Plugin",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "cursorWindowTitle.managedWorkspace": true,
+    "window.title": "Window Title Plugin"
+  }
+}

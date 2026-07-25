@@ -1,0 +1,97 @@
+# Instructions available in this project
+
+## instructions_build
+Compile the extension:
+
+```powershell
+npm install
+npm run compile
+```
+
+## instructions_package
+Create a VSIX for install in Cursor:
+
+```powershell
+npm run compile
+npx vsce package --no-dependencies
+```
+
+Then: Extensions → … → Install from VSIX…
+
+## instructions_debug
+Open this folder in Cursor, press F5 (or Run Extension) to launch an Extension Development Host.
+
+## instructions_usage
+In any project:
+
+1. Create folder `.env` at the workspace root
+2. Create `.env/window_title.txt` with one line (the desired window title)
+3. Open the project with the extension installed; title applies on startup and when that file changes (window title, bottom-left workspace label via a managed `{title}.code-workspace`, and Recents label)
+4. The same title is used for Open Recent / Windows taskbar Recents (jump list), including SSH remotes (`Title [SSH: host]`)
+5. To update labels for other already-listed projects: Command Palette → **Window Title: Refresh Recent / Jump List Labels**
+   - Local: reads `.env/window_title.txt` directly
+   - SSH: reads when that remote is reachable; otherwise uses a cache filled the last time you opened that remote
+
+For Cursor visibility of `window.title`, use:
+
+```json
+"window.titleBarStyle": "native"
+```
+
+## instructions_publish
+Publish to the [Visual Studio Marketplace](https://marketplace.visualstudio.com/):
+
+### One-time setup
+
+1. Create an [Azure DevOps organization](https://dev.azure.com/) (free) if you do not have one.
+2. Create a Personal Access Token (PAT):
+   - User settings → **Personal access tokens** → **New Token**
+   - Organization: All accessible organizations (or the one you use)
+   - Scopes: **Custom defined** → Show all scopes → **Marketplace → Manage**
+   - Copy the token; it is shown once.
+3. Create a publisher at [Marketplace Manage](https://marketplace.visualstudio.com/manage):
+   - Sign in with the same Microsoft account
+   - **Create publisher**
+   - **ID** must match `publisher` in `package.json` (`matthew-schinkel`) — this cannot be changed later
+   - **Name** is the display name (e.g. Matthew Schinkel)
+4. Log in with vsce:
+
+```powershell
+npx vsce login matthew-schinkel
+```
+
+Paste the PAT when prompted.
+
+### Publish a release
+
+```powershell
+npm install
+npm run compile
+npm run publish:marketplace
+```
+
+Or package first and upload manually from [Marketplace Manage](https://marketplace.visualstudio.com/manage):
+
+```powershell
+npm run package
+```
+
+Bump `version` in `package.json` (and add a `CHANGELOG.md` entry) before each new publish.
+
+Official docs: https://code.visualstudio.com/api/working-with-extensions/publishing-extension
+
+Note: Azure DevOps global PATs are scheduled for retirement on December 1, 2026; prefer Entra ID / managed-identity publishing for long-term CI.
+
+### After publish
+
+- Extension URL pattern: `https://marketplace.visualstudio.com/items?itemName=matthew-schinkel.cursor-window-title`
+- Also installable from the Extensions view in VS Code / Cursor by searching **Window Title Plugin**
+- Push source to GitHub: https://github.com/mattschinkel/Visual-Studio-Code-Window-Title-Plugin.git
+
+## instructions_docs
+- `ai_docs/ai.txt` — AI project guidance
+- `progress.md` — status, TODOs, scripts, previous issues
+- `README.md` — user-facing docs
+- `CHANGELOG.md` — release notes for Marketplace
+- `LICENSE` — MIT open source license
+- `name_changes.md` — rename log (create when renames occur)
