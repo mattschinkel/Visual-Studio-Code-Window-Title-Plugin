@@ -1,9 +1,11 @@
 import * as vscode from "vscode";
 
 const EXTENSION_NAME = "Window Title Plugin";
-const TITLE_CACHE_KEY = "cursorWindowTitle.titleCache";
+const TITLE_CACHE_KEY = "windowTitle.titleCache";
 const DEFAULT_TITLE_FILE = ".env/window_title.txt";
-const MANAGED_WORKSPACE_SETTING = "cursorWindowTitle.managedWorkspace";
+const MANAGED_WORKSPACE_SETTING = "windowTitle.managedWorkspace";
+/** Pre-1.0.8 setting key; still recognized so old managed workspaces can be cleaned up. */
+const LEGACY_MANAGED_WORKSPACE_SETTING = "cursorWindowTitle.managedWorkspace";
 
 interface RecentWorkspaceEntry {
   folderUri?: vscode.Uri;
@@ -27,7 +29,7 @@ interface ManagedWorkspaceFile {
 let extensionContext: vscode.ExtensionContext | undefined;
 
 function getConfig() {
-  return vscode.workspace.getConfiguration("cursorWindowTitle");
+  return vscode.workspace.getConfiguration("windowTitle");
 }
 
 function titleFileRelativePath(): string {
@@ -189,7 +191,11 @@ async function isManagedWorkspaceFile(uri: vscode.Uri): Promise<boolean> {
   }
   try {
     const parsed = JSON.parse(text) as ManagedWorkspaceFile;
-    return parsed?.settings?.[MANAGED_WORKSPACE_SETTING] === true;
+    const settings = parsed?.settings;
+    return (
+      settings?.[MANAGED_WORKSPACE_SETTING] === true ||
+      settings?.[LEGACY_MANAGED_WORKSPACE_SETTING] === true
+    );
   } catch {
     return false;
   }
@@ -231,7 +237,7 @@ async function cleanupOldManagedWorkspaces(
 }
 
 /**
- * Cursor/VS Code show the bottom-left workspace label from the .code-workspace
+ * VS Code shows the bottom-left workspace label from the .code-workspace
  * file name (or the folder basename for single-folder windows). Create/open a
  * managed workspace file named after the title so that label matches.
  *
@@ -406,7 +412,7 @@ async function ensureNativeTitleBarIfNeeded(): Promise<void> {
   }
 
   const choice = await vscode.window.showInformationMessage(
-    `${EXTENSION_NAME}: Cursor's custom title bar often ignores window.title. Switch to the native title bar so your project title is visible?`,
+    `${EXTENSION_NAME}: Some editors use a custom title bar that ignores window.title. Switch to the native title bar so your project title is visible?`,
     "Use Native Title Bar",
     "Not Now"
   );
@@ -418,7 +424,7 @@ async function ensureNativeTitleBarIfNeeded(): Promise<void> {
       vscode.ConfigurationTarget.Global
     );
     vscode.window.showInformationMessage(
-      `${EXTENSION_NAME}: Set window.titleBarStyle to native. Restart Cursor for the title bar change to take effect.`
+      `${EXTENSION_NAME}: Set window.titleBarStyle to native. Restart the editor for the title bar change to take effect.`
     );
   }
 }
@@ -483,7 +489,7 @@ async function refreshRecentLabelsFromProjects(
   if (!getConfig().get<boolean>("updateRecentLabel", true)) {
     if (showStatus) {
       vscode.window.showWarningMessage(
-        `${EXTENSION_NAME}: cursorWindowTitle.updateRecentLabel is disabled.`
+        `${EXTENSION_NAME}: windowTitle.updateRecentLabel is disabled.`
       );
     }
     return;
@@ -614,21 +620,21 @@ export async function activate(
   extensionContext = context;
 
   context.subscriptions.push(
-    vscode.commands.registerCommand("cursorWindowTitle.apply", () =>
+    vscode.commands.registerCommand("windowTitle.apply", () =>
       applyWindowTitle(true)
     ),
     vscode.commands.registerCommand(
-      "cursorWindowTitle.refreshRecentLabels",
+      "windowTitle.refreshRecentLabels",
       () => refreshRecentLabelsFromProjects(true)
     ),
     vscode.commands.registerCommand(
-      "cursorWindowTitle.useNativeTitleBar",
+      "windowTitle.useNativeTitleBar",
       async () => {
         await vscode.workspace
           .getConfiguration("window")
           .update("titleBarStyle", "native", vscode.ConfigurationTarget.Global);
         vscode.window.showInformationMessage(
-          `${EXTENSION_NAME}: Set window.titleBarStyle to native. Restart Cursor for the change to take effect.`
+          `${EXTENSION_NAME}: Set window.titleBarStyle to native. Restart the editor for the change to take effect.`
         );
       }
     )
@@ -637,7 +643,7 @@ export async function activate(
   watchTitleSources(context);
   await applyWindowTitle(false);
 
-  const promptedKey = "cursorWindowTitle.nativeTitleBarPrompted";
+  const promptedKey = "windowTitle.nativeTitleBarPrompted";
   if (!context.globalState.get(promptedKey)) {
     await ensureNativeTitleBarIfNeeded();
     await context.globalState.update(promptedKey, true);

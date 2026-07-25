@@ -9,7 +9,7 @@ npm run compile
 ```
 
 ## instructions_package
-Create a VSIX for install in Cursor:
+Create a VSIX for install in VS Code:
 
 ```powershell
 npm run compile
@@ -19,7 +19,7 @@ npx vsce package --no-dependencies
 Then: Extensions → … → Install from VSIX…
 
 ## instructions_debug
-Open this folder in Cursor, press F5 (or Run Extension) to launch an Extension Development Host.
+Open this folder in VS Code, press F5 (or Run Extension) to launch an Extension Development Host.
 
 ## instructions_usage
 In any project:
@@ -32,7 +32,7 @@ In any project:
    - Local: reads `.env/window_title.txt` directly
    - SSH: reads when that remote is reachable; otherwise uses a cache filled the last time you opened that remote
 
-For Cursor visibility of `window.title`, use:
+If a custom title bar ignores `window.title`, use:
 
 ```json
 "window.titleBarStyle": "native"
@@ -52,12 +52,12 @@ Publish to the [Visual Studio Marketplace](https://marketplace.visualstudio.com/
 3. Create a publisher at [Marketplace Manage](https://marketplace.visualstudio.com/manage):
    - Sign in with the same Microsoft account
    - **Create publisher**
-   - **ID** must match `publisher` in `package.json` (`matthew-schinkel`) — this cannot be changed later
+   - **ID** must match `publisher` in `package.json` (`MatthewSchinkel`) — this cannot be changed later
    - **Name** is the display name (e.g. Matthew Schinkel)
 4. Log in with vsce:
 
 ```powershell
-npx vsce login matthew-schinkel
+npx vsce login MatthewSchinkel
 ```
 
 Paste the PAT when prompted.
@@ -84,8 +84,8 @@ Note: Azure DevOps global PATs are scheduled for retirement on December 1, 2026;
 
 ### After publish
 
-- Extension URL pattern: `https://marketplace.visualstudio.com/items?itemName=matthew-schinkel.cursor-window-title`
-- Also installable from the Extensions view in VS Code / Cursor by searching **Window Title Plugin**
+- Extension URL pattern: `https://marketplace.visualstudio.com/items?itemName=MatthewSchinkel.window-title`
+- Also installable from the Extensions view in VS Code by searching **Window Title Plugin**
 - Push source to GitHub: https://github.com/mattschinkel/Visual-Studio-Code-Window-Title-Plugin.git
 
 ## instructions_docs

@@ -1,10 +1,10 @@
-# AI instructions for cursor_window_title_plugin
+# AI instructions for window-title (Window Title Plugin)
 
 Author: Matthew Schinkel
 
 ## Project purpose
 
-VS Code / Cursor extension that sets `window.title`, the workspace folder display name, and Recents/jump-list labels from:
+VS Code extension that sets `window.title`, the workspace folder display name, and Recents/jump-list labels from:
 
 - `.env/window_title.txt` (first non-empty line)
 
@@ -20,12 +20,13 @@ when a workspace opens.
 
 - License: MIT (`LICENSE`)
 - GitHub: https://github.com/mattschinkel/Visual-Studio-Code-Window-Title-Plugin.git
-- Marketplace publisher id in `package.json`: `matthew-schinkel`
+- Marketplace publisher id in `package.json`: `MatthewSchinkel`
+- Extension id: `MatthewSchinkel.window-title`
 
 ## Important constraints
 
-- Cursor marketplace “plugins” (rules/skills/hooks) cannot set the OS/IDE window title. This project is a real editor extension.
-- Cursor’s custom title bar may ignore `window.title`; prefer `"window.titleBarStyle": "native"`.
+- This is a real VS Code extension (not an editor “plugin” pack of rules/skills/hooks).
+- Some editors’ custom title bars may ignore `window.title`; prefer `"window.titleBarStyle": "native"`.
 - Title path is a **folder** `.env` containing `window_title.txt` (not a root `.env` key/value file).
 - Do not use HTTPS for local websites in other projects; not applicable here.
 - Keep `progress.md` and `instructions.txt` updated.
@@ -48,6 +49,6 @@ npx vsce package --no-dependencies
 See `instructions_publish` in `instructions.txt`. Short path after publisher + PAT exist:
 
 ```powershell
-npx vsce login matthew-schinkel
+npx vsce login MatthewSchinkel
 npm run publish:marketplace
 ```

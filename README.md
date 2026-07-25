@@ -1,9 +1,9 @@
 # Window Title Plugin
 
-Sets the Cursor / VS Code **window title** from a per-project file when you open a workspace.
+Sets the VS Code **window title** from a per-project file when you open a workspace.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Visual Studio Marketplace](https://img.shields.io/badge/Marketplace-install-007ACC?logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=matthew-schinkel.cursor-window-title)
+[![Visual Studio Marketplace](https://img.shields.io/badge/Marketplace-install-007ACC?logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=MatthewSchinkel.window-title)
 
 ## Title file
 
@@ -27,7 +27,7 @@ My Project Name
 
 1. `npm install`
 2. `npm run compile`
-3. Open this folder in Cursor, then **Run and Debug → Run Extension**
+3. Open this folder in VS Code, then **Run and Debug → Run Extension**
 
 ### Install as VSIX
 
@@ -37,17 +37,17 @@ npm run compile
 npx vsce package --no-dependencies
 ```
 
-In Cursor: **Extensions → … → Install from VSIX…** and pick the generated `.vsix`.
+In VS Code: **Extensions → … → Install from VSIX…** and pick the generated `.vsix`.
 
-## Cursor title bar note
+## Title bar note
 
-Cursor’s custom title bar often ignores `window.title`. Use:
+Some editors use a custom title bar that ignores `window.title`. Use:
 
 ```json
 "window.titleBarStyle": "native"
 ```
 
-The extension offers this once on first activation, or run command **Window Title: Prefer Native Title Bar (Cursor)**. Restart Cursor after changing the title bar style.
+The extension offers this once on first activation, or run command **Window Title: Prefer Native Title Bar**. Restart the editor after changing the title bar style.
 
 ## Commands
 
@@ -55,7 +55,7 @@ The extension offers this once on first activation, or run command **Window Titl
 |---------|--------|
 | Window Title: Apply from .env/window_title.txt | Re-read the title file and set `window.title` + recent label |
 | Window Title: Refresh Recent / Jump List Labels | Scan recent projects and set labels from their title files |
-| Window Title: Prefer Native Title Bar (Cursor) | Set `window.titleBarStyle` to `native` |
+| Window Title: Prefer Native Title Bar | Set `window.titleBarStyle` to `native` |
 
 ## Recent / taskbar jump list
 
@@ -73,13 +73,13 @@ For older projects already in Recents, run **Window Title: Refresh Recent / Jump
 
 | Setting | Default | Meaning |
 |---------|---------|---------|
-| `cursorWindowTitle.titleFile` | `.env/window_title.txt` | Title file path |
-| `cursorWindowTitle.titleTemplate` | `${customTitle}` | Written to `window.title` |
-| `cursorWindowTitle.watchFiles` | `true` | Re-apply on file change |
-| `cursorWindowTitle.updateRecentLabel` | `true` | Update Recents / jump-list labels |
-| `cursorWindowTitle.updateWorkspaceName` | `true` | Create/open `{title}.code-workspace` so the bottom-left workspace label matches the title |
+| `windowTitle.titleFile` | `.env/window_title.txt` | Title file path |
+| `windowTitle.titleTemplate` | `${customTitle}` | Written to `window.title` |
+| `windowTitle.watchFiles` | `true` | Re-apply on file change |
+| `windowTitle.updateRecentLabel` | `true` | Update Recents / jump-list labels |
+| `windowTitle.updateWorkspaceName` | `true` | Create/open `{title}.code-workspace` so the bottom-left workspace label matches the title |
 
-> The bottom-left **Current workspace** label in Cursor comes from the `.code-workspace` file name (or the folder basename if you only opened a folder). With `updateWorkspaceName` enabled, the extension writes a managed `{title}.code-workspace` and opens it so that label shows your title from `.env/window_title.txt` — without creating an "Untitled (Workspace)".
+> The bottom-left **Current workspace** label comes from the `.code-workspace` file name (or the folder basename if you only opened a folder). With `updateWorkspaceName` enabled, the extension writes a managed `{title}.code-workspace` and opens it so that label shows your title from `.env/window_title.txt` — without creating an "Untitled (Workspace)".
 
 ## License
 

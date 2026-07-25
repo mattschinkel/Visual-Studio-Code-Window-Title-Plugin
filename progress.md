@@ -2,7 +2,7 @@
 
 ## Highlights & features
 
-- VS Code / Cursor extension that applies a per-project window title on workspace open
+- VS Code extension that applies a per-project window title on workspace open
 - Reads `.env/window_title.txt` (first non-empty line)
 - Reads title files over **SSH remotes** via `vscode.workspace.fs`
 - Caches titles so Recents/jump-list can update SSH entries when the host is offline
@@ -11,12 +11,12 @@
 - Sets Open Recent / Windows taskbar jump-list **labels** to the same title (`Title [SSH: host]` for remotes)
 - Command to refresh recent labels for local + SSH projects
 - Command to re-apply title manually
-- One-time prompt / command to switch Cursor to native title bar so `window.title` is visible
+- One-time prompt / command to switch to native title bar so `window.title` is visible
 - MIT open source license; Marketplace metadata points at GitHub repo
 
 ## TODOs / pending work
 
-- [x] Install extension into Cursor and confirm title updates (native title bar / Editor mode)
+- [x] Install extension and confirm title updates (native title bar / Editor mode)
 - [x] Show custom titles in taskbar Recents / jump list via recent `label`
 - [x] Update remote (SSH) recent labels by reading title files (+ cache fallback)
 - [x] Use `.env/window_title.txt` (`.env` folder) as the title file location
@@ -24,14 +24,19 @@
 - [x] Fix "Untitled (Workspace)" caused by renaming a single-folder workspace
 - [x] Show title in bottom-left workspace label via managed `{title}.code-workspace`
 - [x] Add MIT LICENSE and `repository` / `bugs` / `homepage` for Marketplace
-- [ ] Confirm bottom-left status bar shows title after 1.0.7 opens the workspace file
+- [x] Push initial source to https://github.com/mattschinkel/Visual-Studio-Code-Window-Title-Plugin.git
+- [x] Remove Cursor branding from package id, commands, settings, and docs (`window-title` / `windowTitle`)
+- [x] Delete old `cursor-window-title-*.vsix` artifacts
+- [ ] Rename local folder `cursor_window_title_plugin` → `window_title_plugin` (close the workspace first; folder is locked while open)
+- [ ] Confirm bottom-left status bar shows title after managed workspace open
 - [ ] After reload, confirm jump list shows "Window Title Plugin" instead of folder name
 - [ ] Confirm SSH recent labels after opening a remote with `.env/window_title.txt`
 - [ ] Optional: support multi-root workspaces (per-folder titles)
 - [ ] Optional: add a 128×128 PNG `icon` in `package.json` for Marketplace listing
-- [x] Push initial source to https://github.com/mattschinkel/Visual-Studio-Code-Window-Title-Plugin.git
-- [ ] Create Marketplace publisher `matthew-schinkel` and publish first release
+- [x] Create Marketplace publisher `MatthewSchinkel` and publish first release (1.0.8 uploaded; status Verifying)
+- [ ] Confirm Marketplace listing leaves Verifying and shows as Published
 - [ ] Confirm window title is visible after reload (use native title bar if custom bar ignores it)
+- [ ] Install from Marketplace (`MatthewSchinkel.window-title` / 1.0.8) and confirm it works
 
 ## Scripts
 
